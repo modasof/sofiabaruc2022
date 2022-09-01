@@ -367,6 +367,18 @@ function contarcomentarios($id){
 	return $totalitems;
 	}
 
+function contarcomentariostareaje($id){
+	$db = Db::getConnect();
+	//$mesactual = date("n");
+	$select = $db->prepare("SELECT COUNT(id) as totalitems FROM trazabilidad_tareaje WHERE tareaje_id='".$id."'");
+	$select->execute();
+	$valor = $select->fetchAll(); 
+	foreach($valor as $campo){
+		$totalitems = $campo['totalitems'];
+		}
+	return $totalitems;
+	}
+
 function obtenerultimoidreq(){
 	$db = Db::getConnect();
 	//$mesactual = date("n");

@@ -347,7 +347,7 @@ foreach ($result as $camporq) {
 
 
 <div class="row">
-   <div class="col-md-4 col-xs-12">
+   <div style="display: none;" class="col-md-4 col-xs-12">
           <!--<div class="box box-primary collapsed-box">-->
          <div class="box box-primary">
             <div class="box-header with-border">
@@ -453,7 +453,7 @@ $ventames15 = Despachosmesgeneralvalor($i, $anoactual);
 
 
 
-           <div class="col-md-4 col-xs-12">
+           <div style="display: none;" class="col-md-4 col-xs-12">
           <!--<div class="box box-primary collapsed-box">-->
          <div class="box box-primary">
             <div class="box-header with-border">
@@ -669,10 +669,13 @@ $ventames16 = Acpmmesgeneralvalor($i, $anoactual);
         </div>
         <!-- /.col -->
 
+
+        
+
         <?php 
 
 // 2. Reporte mes a mes de las compras (se debe llamar el script de la gráfica).
-    include 'vistas/graficas/compras-index.php';
+   // include 'vistas/graficas/compras-index.php';
  ?>
 
 </div>

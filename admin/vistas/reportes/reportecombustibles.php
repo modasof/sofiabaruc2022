@@ -330,7 +330,7 @@ else
             $recibido_por = $campo['recibido_por'];
             $nomestacion=Estaciones::ObtenerNombreEstacion($punto_despacho);
             $nomequipo=Equipos::obtenerNombreEquipo($equipo_id_equipo);
-            $nombrerecibe=Usuarios::obtenerNombreUsuario($recibido_por);
+            $nombrerecibe=Funcionarios::obtenerNombreFuncionario($recibido_por);
             $nombredespachador=Funcionarios::obtenerNombreFuncionario($despachado_por);
              $nomproyecto=Proyectos::obtenerNombreProyecto($proyecto_id_proyecto);
             $ventatotal=$cantidad*$valor_m3;
@@ -368,7 +368,7 @@ else
               <td><?php echo ($nomestacion) ?></td>
               <td><?php echo ($nombrerecibe) ?></td>
               <td><?php echo ($indicador) ?></td>
-               <td><?php echo utf8_encode($observaciones); ?> <br><?php echo utf8_encode($nomproyecto); ?></td>
+               <td><?php echo utf8_encode($observaciones); ?></td>
               
               
             </tr>

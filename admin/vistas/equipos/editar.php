@@ -1,6 +1,10 @@
 <?php
 include_once 'modelos/gestiondocumentaleq.php';
 include_once 'controladores/gestiondocumentaleqController.php';
+
+include_once 'modelos/propietarios.php';
+include_once 'controladores/propietariosController.php';
+
 include 'vistas/index/estadisticas.php';
 $campos = $campos->getCampos();
 foreach ($campos as $campo) {
@@ -22,11 +26,26 @@ foreach ($campos as $campo) {
     $peso              = $campo['peso'];
     $fecha_adquisicion = $campo['fecha_adquisicion'];
 
+    $nombrepropietario=Propietarios::obtenerNombre($propietario);
+
 }
 ?>
 
 <script src="plugins/dropify/dropify.min.js"></script>
 <link rel="stylesheet" href="plugins/dropify/dropify.min.css">
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+<script type="text/javascript">
+  jQuery(document).ready(function($){
+    $(document).ready(function() {
+        $('.mi-selector2').select2();
+    });
+});
+</script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -109,7 +128,19 @@ $TiempoActual = date('Y-m-d H:i:s');
 												<div class="col-md-4 col-xs-12">
 												<div class="form-group">
 													<label>Propietario<span>*</span></label>
-													<input type="text" name="propietario" placeholder="Indique el propietario" class="form-control" required value="<?php echo($propietario); ?>">
+
+													 <select style="width:250px;" class="form-control mi-selector2" id="propietario" name="propietario" required>
+                            <option value="<?php echo($propietario); ?>" selected><?php echo($nombrepropietario); ?></option>
+                           
+                            <?php                     
+                        $campamentos = Propietarios::obtenerListaPropietarios(); 
+                            foreach ($campamentos as $campamento ){
+                              $id_propietario  = $campamento['id_propietario'];
+                              $nombre_propietario = $campamento['nombre_propietario'];
+                            ?>
+                       <option value="<?php echo $id_propietario ; ?>"><?php echo utf8_encode($nombre_propietario); ?></option>
+                            <?php } ?>
+                          </select>
 												</div>
 											</div>
 

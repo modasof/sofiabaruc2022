@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 header('Content-Type: text/html; charset=UTF-8');
 
 header("Set-Cookie: key=value; path=/; domain=canvas.com; HttpOnly; SameSite=Lax");
@@ -61,6 +63,9 @@ function dias_transcurridos($fecha_i,$fecha_f)
   
   <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js" integrity="sha256-Lsk+CDPOzTapLoAzWW0G/WeQeViS3FMzywpzPZV8SXk=" crossorigin="anonymous"></script>
   
+  <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
+  <!-- Select2 -->
+  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -122,6 +127,11 @@ window.smartsupp||(function(d) {
 
 </head>
   <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+
+    <div style="margin-bottom: 5px;padding: 2px;" class="alert alert-danger alert-dismissible">
+<button style="display: none;" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+ <img src="https://teksystem.co/icono-tek.png" alt="Logo" width="30px" height="30px"><strong> SOFIA  <i class="fa fa-arrow-circle-right"> </i> </strong> Expira el 31 de Agosto 2022 <strong><i class="fa fa-calendar-check-o"> </i> </strong> 
+</div>
 <div class="wrapper">
 
       <?php include "navbar.php";?>

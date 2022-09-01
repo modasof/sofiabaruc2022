@@ -65,7 +65,7 @@ $FechaFinal30dias  = $anoactual . "-" . $mesactual . "-" . $diaactual . " 23:59:
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>T</b>B</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Trasnportes</b>Baruc</span>
+      <span class="logo-lg"><b>Transportes</b>Baruc</span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->

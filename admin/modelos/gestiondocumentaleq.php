@@ -671,6 +671,25 @@ public static function obtenerDocumentosEquipos($equipo){
 	}
 }
 
+ /*******************************************************
+ ** FUNCION PARA MOSTRAR TODOS LOS CAMPOS       **
+ * SELECT * FROM egresos_caja WHERE estado_egreso='1' order by id_egreso_caja DESC
+ ********************************************************/
+    public static function informeexpirafecha($fechainicio,$fechafinal)
+    {
+        try {
+            $db = Db::getConnect();
+        $sql ="SELECT * FROM gestion_documentaleq WHERE fecha_expiracion >='".$fechainicio."' and fecha_expiracion <='".$fechafinal."' and gestion_publicado='1' order by fecha_expiracion asc";
+            $select  = $db->query($sql);
+            //echo ($sql);
+            $camposs = $select->fetchAll();
+            $campos  = new Gestiondocumentaleq('', $camposs);
+            return $campos;
+        } catch (PDOException $e) {
+            echo '{"error en obtener la pagina":{"text":' . $e->getMessage() . '}}';
+        }
+    }
+
 
 
 }

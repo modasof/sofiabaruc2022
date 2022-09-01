@@ -8,7 +8,7 @@ class Db {
 		if (!isset(self::$instance)) {
 			$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 			//self::$instance = new PDO('mysql:host=localhost;dbname=estren_estrenarcarro', 'estren_pcontramaestre', 'P20625697p*', $pdo_options);
-			self::$instance = new PDO('mysql:host=localhost;dbname=u732693446_obinco2022', 'u732693446_obinco2022', 'Teksystem@80761478', $pdo_options);
+			self::$instance = new PDO('mysql:host=localhost;dbname=u914513707_baruco2022', 'u914513707_baruco2022', 'Teksystem@80761478', $pdo_options);
 		}
 		return self::$instance;
 	}

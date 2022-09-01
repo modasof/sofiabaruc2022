@@ -98,11 +98,11 @@
 											</div>
 
 
-											<div class="col-md-12">
+											<div style="display: none;" class="col-md-12">
 												<div class="form-group">
 													<label> Seleccione el Proyecto: <span>*</span></label>
 								<select style="width: 250px;" class="form-control mi-selector2" id="proyecto_id_proyecto" name="proyecto_id_proyecto" required>
-										<option value="" selected>Seleccionar Proyecto...</option>
+										<option value="1" selected>Seleccionar Proyecto...</option>
 										<?php
 										$rubros = Proyectos::obtenerListaProyectos();
 										foreach ($rubros as $campo){
@@ -187,12 +187,12 @@
 								<select style="width: 250px;" class="form-control mi-selector2" id="recibido_por" name="recibido_por" >
 										<option value="" selected>Seleccionar...</option>
 										<?php
-										$rubros = Usuarios::ListaUsuariosCond();
+										$rubros = Funcionarios::obtenerListaFuncionarios();
 										foreach ($rubros as $campo){
-											$id_usuario = $campo['id_usuario'];
-											$nombre_usuario = $campo['nombre_usuario'];
+											$id_funcionario = $campo['id_funcionario'];
+											$nombre_funcionario = $campo['nombre_funcionario'];
 										?>
-										<option value="<?php echo $id_usuario; ?>"><?php echo utf8_encode($nombre_usuario); ?></option>
+										<option value="<?php echo $id_funcionario; ?>"><?php echo utf8_encode($nombre_funcionario); ?></option>
 										<?php } ?>
 								</select>
 												</div>
@@ -210,10 +210,10 @@
 													<small>Decimales separados con punto</small>
 												</div>
 											</div>
-											<div class="col-md-12">
+											<div style="display: none;" class="col-md-12">
 												<div class="form-group">
 													<label>Kilometraje-Horómetro<span>*</span></label>
-													<input type="number" step="any" name="indicador" placeholder="Medidor" class="form-control" required value="">
+													<input type="number" step="any" name="indicador" placeholder="Medidor" class="form-control" required value="0">
 													<small>Decimales separados con punto</small>
 												</div>
 											</div>

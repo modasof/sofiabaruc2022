@@ -38,7 +38,7 @@ foreach($campos as $campo){
             $nomequipo=Equipos::obtenerNombreEquipo($equipo_id_equipo);
             $nomestacion=Estaciones::ObtenerNombreEstacion($punto_despacho);
             $nomdespachadopor=Funcionarios::obtenerNombreFuncionario($despachado_por);
-            $nomrecibidopor=Usuarios::obtenerNombreUsuario($recibido_por);
+            $nomrecibidopor=Funcionarios::obtenerNombreFuncionario($recibido_por);
             $nomproyecto=Proyectos::obtenerNombreProyecto($proyecto_id_proyecto);
 
 if ($punto_despacho==3) {
@@ -162,7 +162,7 @@ if ($punto_despacho==3) {
 								</select>
 												</div>
 											</div>
-												<div class="col-md-12">
+												<div style="display: none;" class="col-md-12">
 												<div class="form-group">
 													<label> Seleccione el Proyecto: <span>*</span></label>
 								<select style="width: 250px;" class="form-control mi-selector2" id="proyecto_id_proyecto" name="proyecto_id_proyecto" required>
@@ -236,7 +236,7 @@ if ($punto_despacho==3) {
 						<select style="width: 250px;" class="form-control mi-selector2" id="recibido_por" name="recibido_por" required>
 							
 										<option value="<?php echo($recibido_por);?>" selected ><?php echo utf8_encode($nomrecibidopor);?></option>
-										<?php
+											<?php
 										$rubros = Funcionarios::obtenerListaFuncionarios();
 										foreach ($rubros as $campo){
 											$id_funcionario = $campo['id_funcionario'];

@@ -8,7 +8,7 @@ $IdSesion = $_SESSION['IdUser'];
 
 $idproveedor=$_GET['id'];
 $idcompra=$_GET['idcompra'];
-$conexion = new mysqli('localhost', 'u732693446_obinco2022', 'Teksystem@80761478','u732693446_obinco2022');
+$conexion = new mysqli('localhost', 'u914513707_baruc', 'Teksystem@80761478','u914513707_baruc');
 
 date_default_timezone_set("America/Bogota");
 $MarcaTemporal = date('Y-m-d');
@@ -60,7 +60,7 @@ if ($result->num_rows > 0) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>Orden Compra Soluciones Nomadas -  OC000<?php echo($idcompra); ?></title>
+   <title>Orden Compra Baruc SAS -  OC000<?php echo($idcompra); ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -89,7 +89,7 @@ if ($result->num_rows > 0) {
     <div class="row">
       <div class="col-xs-12">
         <h2 class="page-header">
-           <img width="150px" height="100px" src="../../../Login/logo-ppal.png"> Orden de Compra
+           <img width="150px" height="100px" src="../../../Login/logo-ppal2.png"> Orden de Compra
           <small class="pull-right">Fecha:<?php 
             $imprfechalarga=fechalarga($MarcaTemporal);
             echo($imprfechalarga);
@@ -103,9 +103,9 @@ if ($result->num_rows > 0) {
        <div class="col-sm-5 invoice-col">
           Solicitado por: 
           <address>
-            <strong>Soluciones de Ingeniería Nómadas</strong><br>
-            Nit. 900584006-4<br>
-            Dirección:<small>CRA 11 Nº7-05 B/ NOVA CERETE</small><br>
+            <strong>Transportes Baruc</strong><br>
+            Nit. 900682144-2<br>
+            Dirección:<small>Sahagun</small><br>
             Celular: (310) 641-4831<br>
             E-mail: <a href="mailto:contabilidad@solucionesnomadas.com">contabilidad@solucionesnomadas.com</a>
           </address>

@@ -132,6 +132,9 @@ $controllers = array(
 	// Funcionalidad Novedades
 	'novedades' => ['editar','guardar','actualizar','todos','nuevo','eliminar','novedadesporfecha'],
 
+	// Funcionalidad Operadores
+	'operadores' => ['editar','guardar','actualizar','todos','nuevo','eliminar'],
+
 	// Funcionalidad Plantilla
 	'plantilla' => ['index'],
 
@@ -144,6 +147,9 @@ $controllers = array(
 
 	// Funcionalidad Proyectos
 	'proyectos' => ['editar','guardar','actualizar','todos','nuevo','eliminar','proyectoextra'],
+
+	// Funcionalidad Propietariis
+	'propietarios' => ['editar','guardar','actualizar','todos','nuevo','eliminar'],
 
 
 	// Funcionalidad Proveedores
@@ -169,6 +175,9 @@ $controllers = array(
 
 	// Funcionalidad Servicios
 	'servicios' => ['todos','nuevo','guardar','eliminar','editar','actualizar'],
+
+	// Funcionalidad Tareaje
+	'tareaje' => ['todos','nuevo','guardar','eliminar','editar','actualizar','porfecha','trazabilidad','aceptarservicio','actualizarservicio'],
 
 	// Funcionalidad Tipos de Mantenimiento
 	'tipomantenimiento' => ['todos','nuevo','editar','guardar','actualizar','eliminar'],
@@ -415,6 +424,11 @@ function call($controller, $action) {
 		$controller = new NovedadesController();
 		break;
 
+	case 'operadores':
+		require_once 'modelos/operadores.php';
+		$controller = new OperadoresController();
+		break;
+
 	case 'plantilla':
 		$controller = new UsuarioController();
 		break;
@@ -432,6 +446,11 @@ function call($controller, $action) {
 	case 'proyectos':
 		require_once 'modelos/proyectos.php';
 		$controller = new proyectosController();
+		break;
+
+	case 'propietarios':
+		require_once 'modelos/propietarios.php';
+		$controller = new propietariosController();
 		break;
 
 	case 'proveedores':
@@ -472,6 +491,11 @@ function call($controller, $action) {
 	case 'subrubros':
 		require_once 'modelos/subrubros.php';
 		$controller = new subrubrosController();
+		break;
+
+	case 'tareaje':
+		require_once 'modelos/tareaje.php';
+		$controller = new TareajeController();
 		break;
 
 	case 'tipomantenimiento':

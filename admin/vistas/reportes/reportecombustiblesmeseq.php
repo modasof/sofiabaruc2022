@@ -8,8 +8,13 @@ include_once 'modelos/usuarios.php';
 include_once 'controladores/productosController.php';
 include_once 'modelos/equipos.php';
 include_once 'controladores/equiposController.php';
+
+include_once 'modelos/propietarios.php';
+include_once 'controladores/propietariosController.php';
+
 include_once 'modelos/reportes.php';
 include_once 'controladores/reportesController.php';
+
 include_once 'modelos/funcionarios.php';
 include_once 'controladores/funcionariosController.php';
 include_once 'modelos/usuarios.php';
@@ -262,14 +267,16 @@ else
             $totalvalor = $campo['totalvalor'];
             $nomequipo=Equipos::obtenerNombreEquipo($equipo_id_equipo);
             $porcentajeconsumo=($totalconsumo/$totalconsumofecha)*100;
+            $idpropietario=Equipos::obtenerPropietarioEquipo($equipo_id_equipo);
+            $nompropietario=Propietarios::obtenerNombre($idpropietario);
 
 
             ?>
             <tr>
-              <td><a href="?controller=reportes&&action=infovolqueta&daterange=<?php echo($fechaconsulta); ?>&idvolqueta=<?php echo($equipo_id_equipo) ?>"><?php echo ($nomequipo) ?></a></td>
+              <td><a href="#"><?php echo ($nomequipo) ?></a></td>
                <td><?php echo (round($totalconsumo,2)) ?></td>
                <td><?php echo ("$".number_format($totalvalor,0)) ?></td>
-              <td><?php echo (round($promediotan,2)) ?> Gl</td>
+              <td><?php echo utf8_decode($nompropietario);?></td>
                <td><?php echo ($totalrecar) ?></td>
                <td><i class="fa fa-pie-chart"> <?php echo (round($porcentajeconsumo,1)) ?>% </i></td>
              
@@ -381,9 +388,9 @@ else
          
         </div>
 
-        <div class="col-md-6">
+        <div  class="col-md-6">
            <div class="callout callout-warning">
-                <h4>Ingresos Carro Cisterna <?php $totalingresocarro=AcpmmesIngresoCarro($FechaStart,$FechaEnd); echo(round($totalingresocarro,2)) ?> <i class="fa fa-toggle-down"> </i> </h4>
+                <h4>Consumo por Propietario <?php $totalingresocarro=AcpmmesIngresoCarro($FechaStart,$FechaEnd); echo(round($totalingresocarro,2)) ?> <i class="fa fa-toggle-down"> </i> </h4>
                 <p><?php echo(fechalarga($datofechain)) ?> al <?php echo (fechalarga($datofechafinal)) ?></p>
               </div>
           <!-- /.box -->
@@ -392,7 +399,7 @@ else
         <div class="col-md-6">
           <div class="box box-warning collapsed-box">
             <div class="box-header with-border">
-             <h3 class="box-title">Detalle Ingresos Carro Cisterna  <?php echo(fechalarga($datofechain)) ?> al <?php echo (fechalarga($datofechafinal)) ?></h3>
+             <h3 class="box-title">Detalle consumo por propietario  <?php echo(fechalarga($datofechain)) ?> al <?php echo (fechalarga($datofechafinal)) ?></h3>
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                 </button>
@@ -412,60 +419,54 @@ else
                                 <th style="background-color: #fcf8e3" class="success"></th>
                                 <th style="background-color: #fcf8e3" class="success"></th>
                                 <th style="background-color: #fcf8e3" class="success"></th>
-                                <th style="background-color: #fcf8e3" class="success"></th>
-                                <th style="background-color: #fcf8e3" class="success"></th>
+                                 <th style="background-color: #fcf8e3" class="success"></th>
+                                
                                 
                                 
                             </tfoot>
           <thead>
             <tr style="background-color: #4f5962;color: white;">
-            <th>Fecha</th>
-            <th>Estación</th>
+            
+            <th>Propietario</th>
             <th>Gl.</th>
              <th>Valor</th>
-             <th>Soporte</th>
+             <th>%</th>
+            
             </tr>
             <tr >
-            <th>Fecha</th>
-            <th>Estación</th>
+          
+            <th>Propietario</th>
             <th>Gl.</th>
              <th>Valor</th>
-             <th>Soporte</th>
+             <th>%</th>
+            
             </tr>
           </thead>
        <tbody>
 
   <?php
-           $res=Reportes::ReporteIngresosCarroTanque($FechaStart,$FechaEnd);
+           $res=Reportes::ReporteporPropietario($FechaStart,$FechaEnd);
            $campos = $res->getCampos();
            foreach ($campos as $campo){
-             $id = $campo['id'];
-            $fecha_reporte = $campo['fecha_reporte'];
-            $imagen = $campo['imagen'];
-            $valor_m3 = $campo['valor_m3'];
-            $cantidad = $campo['cantidad'];
-            $punto_despacho = $campo['punto_despacho'];
-            $equipo_id_equipo = $campo['equipo_id_equipo'];
-            $nomestacion=Estaciones::ObtenerNombreEstacion($punto_despacho);
-            $nomequipo=Equipos::obtenerNombreEquipo($equipo_id_equipo);
-            $nombrerecibe=Usuarios::obtenerNombreUsuario($recibido_por);
-            $nombredespachador=Funcionarios::obtenerNombreFuncionario($despachado_por);
-            $ventatotal=$cantidad*$valor_m3;
+            $propietario = $campo['propietario'];
+
+            $nompropietario=Propietarios::obtenerNombre($propietario);
+  $consumopropietario = Reportes::ReporteconsumoporPropietario($FechaStart,$FechaEnd,$propietario); 
+  $valorconsumopropietario = Reportes::ReportevalorporPropietario($FechaStart,$FechaEnd,$propietario);
+
+  $porcentajepropietario=($consumopropietario/$totalingresocarro)*100;
+           
+           
       
 
   ?>
                 <tr>
-                  <td><?php echo($fecha_reporte); ?></td>
-                  <td><?php echo($nomestacion); ?></td>
-                  <td><?php echo(round($cantidad,2)); ?></td>
-                  <td><?php echo("$ ".number_format($ventatotal,0)); ?></td>
-                  <td> <a target="_blank" href="<?php echo($imagen); ?>"  class="tooltip-primary text-primary" title="Ver Soporte">
-                <i class="fa fa-eye bigger-110 "></i>
-              </a>
-               <a download="Soporte" href="<?php echo($imagen); ?>"  class="tooltip-primary text-dark" title="Descargar Soporte">
-                <i class="fa fa-cloud-download bigger-110 "></i>
-                </a>
-            </td>
+                
+                  <td><?php echo($nompropietario); ?></td>
+                  <td><?php echo(round($consumopropietario,2)); ?></td>
+                  <td><?php echo("$ ".number_format($valorconsumopropietario,0)); ?></td>
+                   <td><span class="badge bg-green"><?php echo(round($porcentajepropietario,1)); ?>%</span></td>
+                 
                 </tr>
 
                <?php 
@@ -481,115 +482,7 @@ else
 
          
         </div>
-                <div class="col-md-6">
-           <div class="callout callout-warning">
-                <h4>Egresos Carro Cisterna <?php $totalegresocarro=AcpmmesEgresoCarro($FechaStart,$FechaEnd); echo(round($totalegresocarro,2)) ?> <i class="fa fa-toggle-up"> </i> </h4>
-                <p><?php echo(fechalarga($datofechain)) ?> al <?php echo (fechalarga($datofechafinal)) ?></p>
-              </div>
-          <!-- /.box -->
-        </div>
-
-        <div class="col-md-6">
-          <div class="box box-warning collapsed-box">
-            <div class="box-header with-border">
-             <h3 class="box-title">Detalle Egresos Carro Cisterna  <?php echo(fechalarga($datofechain)) ?> al <?php echo (fechalarga($datofechafinal)) ?></h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                </button>
-                <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
-              </div>
-            </div>
-           
-            <!-- /.box-header -->
-            <div class="box-body">
-                   <div class="clearfix">
-                      <div class="pull-left tableTools-container4"></div>
-                    </div>
-                    
-      <div class="table-responsive mailbox-messages">
-          <table id="cotizaciones4" class="table  table-responsive table-striped table-bordered table-hover" style="width: 100%;font-size: 12px;">
-            <tfoot style="display: table-header-group;">
-                                <th style="background-color: #fcf8e3" class="success"></th>
-                                <th style="background-color: #fcf8e3" class="success"></th>
-                                <th style="background-color: #fcf8e3" class="success"></th>
-                                <th style="background-color: #fcf8e3" class="success"></th>
-                                <th style="background-color: #fcf8e3" class="success"></th>
-                                
-                                
-                            </tfoot>
-          <thead>
-            <tr style="background-color: #4f5962;color: white;">
-            <th>Fecha</th>
-            <th>Equipo</th>
-            <th>Gl.</th>
-             <th>Valor</th>
-             <th>Soporte</th>
-            </tr>
-            <tr >
-            <th>Fecha</th>
-            <th>Equipo</th>
-            <th>Gl.</th>
-             <th>Valor</th>
-             <th>Soporte</th>
-            </tr>
-          </thead>
-       <tbody>
-
-  <?php
-           $res=Reportes::ReporteEgresosCarroTanque($FechaStart,$FechaEnd);
-           $campos = $res->getCampos();
-           foreach ($campos as $campo){
-             $id = $campo['id'];
-            $fecha_reporte = $campo['fecha_reporte'];
-            $imagen = $campo['imagen'];
-            $valor_m3 = $campo['valor_m3'];
-            $cantidad = $campo['cantidad'];
-            $indicador = $campo['indicador'];
-            $creado_por = $campo['creado_por'];
-            $estado_reporte = $campo['estado_reporte'];
-            $reporte_publicado = $campo['reporte_publicado'];
-            $tipo_despacho = $campo['tipo_despacho'];
-            $punto_despacho = $campo['punto_despacho'];
-            $marca_temporal = $campo['marca_temporal'];
-            $observaciones = $campo['observaciones'];
-            $equipo_id_equipo = $campo['equipo_id_equipo'];
-            $despachado_por = $campo['despachado_por'];
-            $recibido_por = $campo['recibido_por'];
-            $nomestacion=Estaciones::ObtenerNombreEstacion($punto_despacho);
-            $nomequipo=Equipos::obtenerNombreEquipo($equipo_id_equipo);
-            $nombrerecibe=Usuarios::obtenerNombreUsuario($recibido_por);
-            $nombredespachador=Funcionarios::obtenerNombreFuncionario($despachado_por);
-            $ventatotal=$cantidad*$valor_m3;
-      
-
-  ?>
-                <tr>
-                  <td><?php echo($fecha_reporte); ?></td>
-                  <td><?php echo($nomequipo); ?></td>
-                  <td><?php echo(round($cantidad,2)); ?></td>
-                  <td><?php echo("$ ".number_format($ventatotal,0)); ?></td>
-                  <td><a target="_blank" href="<?php echo($imagen); ?>"  class="tooltip-primary text-primary" title="Ver Soporte">
-                <i class="fa fa-eye bigger-110 "></i>
-              </a>
-               <a download="Soporte" href="<?php echo($imagen); ?>"  class="tooltip-primary text-dark" title="Descargar Soporte">
-                <i class="fa fa-cloud-download bigger-110 "></i>
-                </a></td>
-                </tr>
-
-               <?php 
-             }
-                ?>
-              </tbody></table>
-            </div>
-            </div>
-            <!-- /.box-body -->
-           
-          </div>
-          <!-- /.box -->
-
-         
-        </div>
-
+                
 
 					</div> <!-- FIN DE ROW-->
 				</div><!-- FIN DE CONTAINER FORMULARIO-->
@@ -625,45 +518,7 @@ else
 
 
 <!-- page script -->
-<script>
-  $(function () {
-    $('#cotizaciones33').DataTable({
-      "paging": true,
-      "lengthChange": true,
-      "lengthMenu": [[25, 50, 150, -1], [25, 50, 150, "All"]],
-      "searching": true,
-      "order": [[ 0, "asc" ]],
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    language: {
-    "sProcessing":     "Procesando...",
-    "sLengthMenu":     "Mostrar _MENU_ registros",
-    "sZeroRecords":    "No se encontraron resultados",
-    "sEmptyTable":     "Ningún dato disponible en esta tabla",
-    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-    "sInfoPostFix":    "",
-    "sSearch":         "Buscar:",
-    "sUrl":            "",
-    "sInfoThousands":  ",",
-    "sLoadingRecords": "Cargando...",
-    "oPaginate": {
-        "sFirst":    "Primero",
-        "sLast":     "Último",
-        "sNext":     "Siguiente",
-        "sPrevious": "Anterior"
-    },
-    "oAria": {
-        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-    }
-}
 
-    });
-  });
-</script>
 <script>
    function format2(n, currency) {
     return currency + " " + n.toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
@@ -1010,27 +865,27 @@ $('#cotizaciones3 thead tr:eq(1) th').each( function () {
  
             // Total over all pages
            
+             pageTotal1 = api
+                .column( 1, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
              pageTotal2 = api
                 .column( 2, { page: 'current'} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-
-             pageTotal3 = api
-                .column( 3, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
            
              // Update footer
-              $( api.column( 2 ).footer() ).html(
-                ''+formatmoneda(pageTotal2,'GL' )
+              $( api.column( 1 ).footer() ).html(
+                ''+formatmoneda(pageTotal1,'GL' )
             );  
               // Update footer
-              $( api.column( 3 ).footer() ).html(
-                '$ '+formatmoneda(pageTotal3,'' )
+              $( api.column( 2 ).footer() ).html(
+                '$ '+formatmoneda(pageTotal2,'' )
             );  
         },
 

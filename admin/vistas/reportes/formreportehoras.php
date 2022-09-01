@@ -29,7 +29,7 @@
 </script>
 <div class="box box-primary ">
             <div class="box-header with-border">
-              <h3 class="box-title"> Registrar Horas / Kilómetraje
+              <h3 class="box-title"> Registrar Kilometraje Planillas
               	<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                 </button>
               </h3>
@@ -91,20 +91,13 @@
 												</div>
 											</div>
 
-											<div  id="" class="col-md-12">
+											<div style="display: none;" id="" class="col-md-12">
 												<div class="form-group">
 													<label> Reportado por: <span>*</span></label>
 								
 									<select class="form-control mi-selector2" id="despachado_por" name="despachado_por" required>
-										<option value="" selected >Seleccionar...</option>
-										<?php
-										$rubros = Funcionarios::obtenerListaFuncionarios();
-										foreach ($rubros as $campo){
-											$id_funcionario = $campo['id_funcionario'];
-											$nombre_funcionario = $campo['nombre_funcionario'];
-										?>
-										<option value="<?php echo $id_funcionario; ?>"><?php echo utf8_encode($nombre_funcionario); ?></option>
-										<?php } ?>
+										<option value="0" selected >Seleccionar...</option>
+										
 								</select>
 												</div>
 											</div>
@@ -125,6 +118,23 @@
 								</select>
 												</div>
 											</div>
+												<div class="col-md-12">
+												<div class="form-group">
+													<label> Seleccione el Cliente: <span>*</span></label>
+								<select class="form-control mi-selector3" id="cliente_id_cliente" name="cliente_id_cliente" required>
+										<option value="" selected>Seleccionar...</option>
+										<?php
+										$rubros = Clientes::obtenerListaClientes();
+										foreach ($rubros as $campo){
+											$id_cliente = $campo['id_cliente'];
+											$nombre_cliente = $campo['nombre_cliente'];
+										?>
+										<option value="<?php echo $id_cliente; ?>"><?php echo utf8_encode($nombre_cliente); ?></option>
+										<?php } ?>
+								</select>
+
+												</div>
+											</div>
 											
 											<div class="col-md-12">
 												<div class="form-group">
@@ -140,10 +150,10 @@
 													<small>Decimales separados con punto</small>
 												</div>
 										</div>
-										<div class="col-md-12">
+										<div style="display: none;" class="col-md-12">
 												<div class="form-group">
 													<label>Km Totales<span>*</span></label>
-													<input type="number" step="any" name="hora_inactiva" placeholder="Horas Inactivas" class="form-control" required value="">
+													<input type="number" step="any" name="hora_inactiva" placeholder="Horas Inactivas" class="form-control" value="0">
 													<small>Decimales separados con punto</small>
 												</div>
 										</div>

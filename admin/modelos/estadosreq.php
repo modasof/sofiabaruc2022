@@ -200,6 +200,23 @@ public static function ObtenerListaEstados(){
 /*******************************************************
 ** FUNCION PARA OBTENER LA LISTA DE CLIENTES	  **
 ********************************************************/
+public static function ObtenerListaEstadosTareaje(){
+	try {
+		$db=Db::getConnect();
+		$select=$db->query("SELECT * FROM estados_tareaje WHERE publicado='1' order by prioridad");
+    	$campos=$select->fetchAll();
+		$camposs = new Estadosreq('',$campos);
+		$campostraidos = $camposs->getCampos();
+		return $campostraidos;
+	}
+	catch(PDOException $e) {
+		echo '{"error en obtener la pagina":{"text":'. $e->getMessage() .'}}';
+	}
+}
+
+/*******************************************************
+** FUNCION PARA OBTENER LA LISTA DE CLIENTES	  **
+********************************************************/
 public static function ObtenerListaCentrodistribucion(){
 	try {
 		$db=Db::getConnect();

@@ -4,9 +4,9 @@ session_start();
 // include("../Administrator/Lib/seguridad.php");
 // include ("conexion.php");
 $hostname = "localhost";
-$username = "u732693446_obinco2022";
+$username = "u914513707_baruc";
 $password = "Teksystem@80761478";
-$database = "u732693446_obinco2022";
+$database = "u914513707_baruc";
 $conexion = new mysqli($hostname, $username, $password, $database);
 
 // $sql ="SELECT Tiempo FROM T_Config WHERE Desarrollador='TEKSYSTEM S.A.S'";  
@@ -108,6 +108,7 @@ if ($Password_encriptado==$MyPass && $IdEstado==$Activo ) {
     
     //$seguridad = AgregarLog($IdUser,"Logeado como administrador","login.php");
     header("location:../admin/index.php"); 
+    //echo("el usuario que ingreso es: ".$usuario);
  }
 else { 
    header("location:index.php?Mensaje=14");

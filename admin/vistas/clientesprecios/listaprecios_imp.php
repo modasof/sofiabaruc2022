@@ -8,7 +8,7 @@ $IdSesion = $_SESSION['IdUser'];
 
 $idproveedor=$_GET['id'];
 $id_cliente=$_GET['id'];
-$conexion = new mysqli('localhost', 'u732693446_obinco2022', 'Teksystem@80761478','u732693446_obinco2022');
+$conexion = new mysqli('localhost', 'u914513707_baruco2022', 'Teksystem@80761478','u914513707_baruco2022');
 
 date_default_timezone_set("America/Bogota");
 $MarcaTemporal = date('Y-m-d');

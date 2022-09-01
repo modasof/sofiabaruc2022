@@ -296,7 +296,7 @@ foreach ($campos as $campo) {
             <!-- /.box-body -->
           </div>
         </div>
-        <div class="col-md-5">
+        <div style="display: none;" class="col-md-5">
           <div class="box box-default">
             <div class="box-header with-border">
               <h3 class="box-title">Trazabilidad</h3>

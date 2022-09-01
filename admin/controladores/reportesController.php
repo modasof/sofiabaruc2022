@@ -908,8 +908,8 @@ class ReportesController
         $fecha_reporte          = $_POST['fecha_reporte'];
         $proveedor_id_proveedor = $_POST['proveedor_id_proveedor'];
         $valor_total            = $_POST['valor_total'];
-        $nomproveedor=Reportes::obtenerNombreProveedoralerta($proveedor_id_proveedor);
-        $detalle = "Ha ingresado una cuenta de cobro de ".$nomproveedor." por: " . $valor_total . ".";
+        $nomproveedor           = Reportes::obtenerNombreProveedoralerta($proveedor_id_proveedor);
+        $detalle                = "Ha ingresado una cuenta de cobro de " . $nomproveedor . " por: " . $valor_total . ".";
 
         //$nuevo['imagen']=$ruta_imagen;
         $variable     = $_POST;
@@ -930,12 +930,12 @@ class ReportesController
         }
         //array_push($nuevoarreglo,$nuevo);
         $campo = new Reportes('', $nuevoarreglo);
-    $res   = Reportes::guardarcuentaxpagar($campo, $ruta_imagen);
-    $res = Reportes::guardarnotificacion($usuario_creador, 16, $marca_temporal, $fecha_reporte, $detalle);
-    $res = Reportes::guardarnotificacion($usuario_creador, 58, $marca_temporal, $fecha_reporte, $detalle);
-    $res = Reportes::guardarnotificacion($usuario_creador, 39, $marca_temporal, $fecha_reporte, $detalle);
-    $res = Reportes::guardarnotificacion($usuario_creador, 144, $marca_temporal, $fecha_reporte, $detalle);
-    $res = Reportes::guardarnotificacion($usuario_creador, 151, $marca_temporal, $fecha_reporte, $detalle);
+        $res   = Reportes::guardarcuentaxpagar($campo, $ruta_imagen);
+        $res   = Reportes::guardarnotificacion($usuario_creador, 16, $marca_temporal, $fecha_reporte, $detalle);
+        $res   = Reportes::guardarnotificacion($usuario_creador, 58, $marca_temporal, $fecha_reporte, $detalle);
+        $res   = Reportes::guardarnotificacion($usuario_creador, 39, $marca_temporal, $fecha_reporte, $detalle);
+        $res   = Reportes::guardarnotificacion($usuario_creador, 144, $marca_temporal, $fecha_reporte, $detalle);
+        $res   = Reportes::guardarnotificacion($usuario_creador, 151, $marca_temporal, $fecha_reporte, $detalle);
 
         if ($res) {
             echo "<script>jQuery(function(){Swal.fire(\"¡Datos guardados!\", \"Se han guardado correctamente los datos\", \"success\");});</script>";
@@ -1927,6 +1927,17 @@ class ReportesController
                 $nuevoarreglo[$campo] = $valor;
             }
         }
+
+        $kminicial = $_POST['indicador'];
+        $kmfinal   = $_POST['cantidad'];
+        $equipo_id_equipo=$_POST['equipo_id_equipo'];
+
+        $validacionduplicado = Reportes::validarkmpor($kminicial,$kmfinal,$equipo_id_equipo);
+
+        if ($validacionduplicado>0) {
+             echo "<script>jQuery(function(){Swal.fire(\"¡Erro al guardar!\", \"No se han guardado los datos, el equipo seleccionado ya tiene reportado el km inicial ".$kminicial." y el km final ".$kmfinal." , verifique los datos\", \"info\");});</script>";
+        }else{
+
         //array_push($nuevoarreglo,$nuevo);
         $campo = new Reportes('', $nuevoarreglo);
         $res   = Reportes::guardarhoras($campo);
@@ -1935,6 +1946,7 @@ class ReportesController
         } else {
             echo "<script>jQuery(function(){Swal.fire(\"¡Erro al guardar!\", \"No se han guardado correctamente los datos\", \"error\");});</script>";
         }
+    }
         $this->showhoras();
     }
 

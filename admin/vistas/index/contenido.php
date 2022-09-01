@@ -39,6 +39,7 @@ include 'vistas/index/estadisticas_index.php';
 include 'vistas/index/estadisticas_indexequipos.php';
 include 'vistas/index/estadisticasinforme1.php';
 
+
 $RolSesion = $_SESSION['IdRol'];
 $IdSesion = $_SESSION['IdUser'];
 $elcliente = $_SESSION['CodigoCliente'];

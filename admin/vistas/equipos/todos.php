@@ -1,7 +1,10 @@
 <?php 
 ini_set('display_errors', '0');
-include_once 'modelos/cuentas.php';
-include_once 'controladores/cuentasController.php';
+
+
+include_once 'modelos/propietarios.php';
+include_once 'controladores/propietariosController.php';
+
 include 'vistas/index/estadisticas.php';
 
 if (isset($_POST['daterange'])) {
@@ -202,7 +205,7 @@ else
               
               <th style="width: 20%;">Equipo</th>
               <th>Propietario</th>
-              <th>Comisión</th>
+              <th>Placa</th>
               <th>Tipo Equipo</th>
               <th>Marca</th>
              
@@ -211,7 +214,7 @@ else
             <tr>
              <th style="width: 20%;">Equipo</th>
               <th>Propietario</th>
-              <th>Comisión</th>
+              <th>Placa</th>
               <th>Tipo Equipo</th>
               <th>Marca</th>
              
@@ -243,6 +246,8 @@ else
             $totalgalones=round(ConsumoGalonespor($id_equipo),1);
             $totalhoraskm=round(ReporteHorasKmpor($id_equipo),1);
 
+            $nombrepropietario=Propietarios::obtenerNombre($propietario);
+
             if ($totalgalones==0) {
               $consumointernoreportado=0;
             }
@@ -252,11 +257,11 @@ else
             }
 				?>
 						<tr>
-              <td><?php echo utf8_encode($nombre_equipo); ?></td>
-              <td><?php echo utf8_encode($propietario); ?></td>
-              <td><?php echo utf8_encode($comision); ?> %</td>
-              <td><?php echo utf8_encode($tipo_equipo); ?></td>
-               <td><?php echo utf8_encode($marca_equipo); ?></td>
+              <td><?php echo utf8_decode($nombre_equipo); ?></td>
+              <td><?php echo utf8_decode($nombrepropietario); ?></td>
+              <td><?php echo utf8_decode($placa); ?></td>
+              <td><?php echo utf8_decode($tipo_equipo); ?></td>
+               <td><?php echo utf8_decode($marca_equipo); ?></td>
              
              
               <td>

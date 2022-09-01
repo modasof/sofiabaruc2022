@@ -1,6 +1,6 @@
 <?php 
 ini_set('display_errors', '0');
-$conexion = new mysqli('localhost', 'u732693446_obinco2022', 'Teksystem@80761478','u732693446_obinco2022');
+$conexion = new mysqli('localhost', 'u914513707_baruco2022', 'Teksystem@80761478','u914513707_baruco2022');
  ?> 
 <!-- DataTables -->
   <!-- <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap4.css"> -->

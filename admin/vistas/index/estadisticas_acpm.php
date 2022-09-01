@@ -32,7 +32,7 @@ function AcpmmesEstaciones($FechaStart,$FechaEnd){
 	$db = Db::getConnect();
 	//$mesactual = date("n");
 	$select = $db->prepare("SELECT IFNULL(sum(cantidad),0) as Galones FROM reporte_combustibles
-where fecha_reporte >='".$FechaStart."' and fecha_reporte <='".$FechaEnd."' and reporte_publicado='1' and punto_despacho<>'3'");
+where fecha_reporte >='".$FechaStart."' and fecha_reporte <='".$FechaEnd."' and reporte_publicado='1'");
 	$select->execute();
 	$valor = $select->fetchAll(); 
 	foreach($valor as $campo){
@@ -46,7 +46,7 @@ function AcpmmesIngresoCarro($FechaStart,$FechaEnd){
 	$db = Db::getConnect();
 	//$mesactual = date("n");
 	$select = $db->prepare("SELECT IFNULL(sum(cantidad),0) as Galones FROM reporte_combustibles
-where fecha_reporte >='".$FechaStart."' and fecha_reporte <='".$FechaEnd."' and reporte_publicado='1' and equipo_id_equipo='732'");
+where fecha_reporte >='".$FechaStart."' and fecha_reporte <='".$FechaEnd."' and reporte_publicado='1'");
 	$select->execute();
 	$valor = $select->fetchAll(); 
 	foreach($valor as $campo){
